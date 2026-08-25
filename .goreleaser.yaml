@@ -38,7 +38,7 @@ homebrew_casks:
     repository:
       owner: ojarosch
       name: homebrew-tap
-      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
     commit_author:
       name: goreleaserbot
       email: bot@goreleaser.com
@@ -46,6 +46,19 @@ homebrew_casks:
     directory: Casks
     homepage: "https://github.com/ojarosch/planlens"
     description: "Reviewer-oriented semantic diff for Terraform/OpenTofu plans"
+    license: "Apache-2.0"
+    binaries:
+      - planlens
+    url:
+      verified: "github.com/ojarosch/planlens"
+    hooks:
+      post:
+        # Binary is not signed/notarized; strip quarantine so Gatekeeper
+        # doesn't kill it on first run.
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/planlens"]
+          end
 
 snapshot:
   version_template: "{{ incpatch .Version }}-next"

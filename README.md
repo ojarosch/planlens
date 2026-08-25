@@ -1,8 +1,18 @@
-# PlanLens
+# planlens
+
+> [!NOTE]
+> **macOS users:** planlens is not signed with an Apple Developer certificate
+> and therefore not notarized. The Homebrew cask removes the quarantine flag
+> automatically, but if you download a binary manually, macOS Gatekeeper may
+> block it on first run. Unblock it with:
+>
+> ```bash
+> xattr -dr com.apple.quarantine ./planlens
+> ```
 
 **A reviewer-oriented semantic diff for Terraform and OpenTofu plans.**
 
-Terraform tells you everything that will change. PlanLens helps you find the changes worth reviewing.
+Terraform tells you everything that will change. planlens helps you find the changes worth reviewing.
 
 ```text
 $ terraform plan
@@ -47,12 +57,12 @@ Use --verbose to display them.
 5 highlighted · 41 collapsed
 ```
 
-## Why PlanLens exists
+## What is planlens?
 
 A realistic plan can contain hundreds of changes of which only a handful matter.
 Scrolling through raw `terraform show -json` output makes it easy to miss the one replacement hiding among 200 tag updates.
 
-PlanLens compresses a plan into what a reviewer actually approves:
+planlens compresses a plan into what a reviewer actually approves:
 
 - what gets **destroyed**
 - what gets **replaced**, and *why* (`replace_paths`)
@@ -67,14 +77,16 @@ It answers one question:
 
 > **What meaningful changes am I actually approving?**
 
-## What PlanLens is not
+planlens does not execute Terraform/OpenTofu, never shells out to them, and needs no credentials or network access.
 
-PlanLens is **not a security scanner**. It does not judge whether `0.0.0.0/0`, an IAM wildcard, or a public database is acceptable — it shows you the diff so you (or your scanner) can decide.
+## What planlens is not
+
+planlens is **not a security scanner**. It does not judge whether `0.0.0.0/0`, an IAM wildcard, or a public database is acceptable — it shows you the diff so you (or your scanner) can decide.
 
 ```text
 ├── Trivy / Checkov / OPA   Is the resulting configuration secure?
 ├── Infracost               How does cost change?
-└── PlanLens                What meaningful changes am I approving?
+└── planlens                What meaningful changes am I approving?
 ```
 
 Findings carry **categories**, not risk levels. A category describes what kind of change occurred — never whether the architecture is good or bad.
@@ -123,7 +135,7 @@ See noise reduction in action on a realistically ugly 46-resource demo plan:
 planlens testdata/demo-ugly-plan/plan.json
 ```
 
-PlanLens does not execute Terraform/OpenTofu, never shells out to them, and needs no credentials or network access. Analysis happens entirely locally; plan files may contain sensitive values, and PlanLens treats them accordingly.
+planlens runs entirely locally; plan files may contain sensitive values, and planlens treats them accordingly.
 
 ## Change categories
 
@@ -143,7 +155,7 @@ Low-signal categories (metadata, computed-only, plain creates) are collapsed int
 
 ### Replacement causes and order
 
-Replacement is PlanLens's strongest feature. Terraform's plan JSON reports *which attributes force the replacement* (`replace_paths`) and the lifecycle ordering; PlanLens surfaces both:
+Replacement is planlens's strongest feature. Terraform's plan JSON reports *which attributes force the replacement* (`replace_paths`) and the lifecycle ordering; planlens surfaces both:
 
 ```text
 REPLACEMENT
@@ -168,7 +180,7 @@ ingress[0].cidr_blocks:
 
 ### IAM policy diffs, without opinions
 
-For IAM policy resources, PlanLens parses the policy document and reports structural changes:
+For IAM policy resources, planlens parses the policy document and reports structural changes:
 
 ```text
 ACCESS
@@ -213,7 +225,7 @@ Gates are objective and mechanical — no security scoring:
   run: planlens --fail-on destroy --fail-on replacement tfplan.json
 ```
 
-Without gates, PlanLens always exits `0`.
+Without gates, planlens always exits `0`.
 
 ## Markdown for pull requests
 
@@ -221,7 +233,7 @@ Without gates, PlanLens always exits `0`.
 planlens --format markdown tfplan.json > review.md
 ```
 
-Renders headings per category, inline code diffs, and collapses low-signal changes into a `<details>` block. Post it wherever your CI likes — PlanLens has no GitHub/GitLab API integration by design.
+Renders headings per category, inline code diffs, and collapses low-signal changes into a `<details>` block. Post it wherever your CI likes — planlens has no GitHub/GitLab API integration by design.
 
 ## JSON output
 
@@ -283,10 +295,6 @@ git push origin v0.2.1
 ```
 
 Update `CHANGELOG.md` before tagging.
-
-## Roadmap
-
-Planned after v0.2: `planlens compare old.json new.json` (diff two proposed plans), SARIF/markdown posting integrations left to CI, more enrichers.
 
 ## License
 
