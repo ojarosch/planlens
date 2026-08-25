@@ -1,0 +1,21 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.worker",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "worker",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"ami": "ami-123", "public_ip": "203.0.113.5"},
+        "after": {"ami": null, "public_ip": null},
+        "after_unknown": {"ami": true, "public_ip": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}

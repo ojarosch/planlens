@@ -1,0 +1,32 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.billing",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "billing",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {
+          "engine": "mysql",
+          "engine_version": "8.0.35",
+          "storage_type": "gp2",
+          "publicly_accessible": false
+        },
+        "after": {
+          "engine": "mysql",
+          "engine_version": "8.0.36",
+          "storage_type": "gp3",
+          "publicly_accessible": false
+        },
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false,
+        "replace_paths": [["storage_type"]]
+      }
+    }
+  ]
+}

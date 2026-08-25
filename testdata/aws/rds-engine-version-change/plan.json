@@ -1,0 +1,21 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.reports",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "reports",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"engine": "postgres", "engine_version": "16.2", "allocated_storage": 100},
+        "after": {"engine": "postgres", "engine_version": "16.3", "allocated_storage": 100},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}

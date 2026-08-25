@@ -1,0 +1,45 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "azurerm_network_security_group.db",
+      "mode": "managed",
+      "type": "azurerm_network_security_group",
+      "name": "db",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "name": "db-nsg",
+          "security_rule": [
+            {
+              "name": "allow-db",
+              "direction": "Inbound",
+              "access": "Allow",
+              "protocol": "Tcp",
+              "source_address_prefix": "10.0.1.0/24",
+              "destination_port_range": "1433"
+            }
+          ]
+        },
+        "after": {
+          "name": "db-nsg",
+          "security_rule": [
+            {
+              "name": "allow-db",
+              "direction": "Inbound",
+              "access": "Allow",
+              "protocol": "Tcp",
+              "source_address_prefix": "*",
+              "destination_port_range": "1433"
+            }
+          ]
+        },
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_instance.a[0]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "a",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.b",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "b",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.small", "tags": {"Team": "core"}},
+        "after": {"instance_type": "t3.small", "tags": {"Team": "platform"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}

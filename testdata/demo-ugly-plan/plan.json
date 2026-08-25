@@ -1,0 +1,698 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.primary",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "primary",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {"engine_version": "14.9", "identifier": "primary-db"},
+        "after": {"engine_version": "16.4", "identifier": "primary-db"},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false,
+        "replace_paths": [["engine_version"]]
+      }
+    },
+    {
+      "address": "aws_route.private[0]",
+      "mode": "managed",
+      "type": "aws_route",
+      "name": "private",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete"],
+        "before": {"destination_cidr_block": "10.42.0.0/16", "route_table_id": "rtb-001"},
+        "after": null,
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_route.private[1]",
+      "mode": "managed",
+      "type": "aws_route",
+      "name": "private",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete"],
+        "before": {"destination_cidr_block": "10.43.0.0/16", "route_table_id": "rtb-002"},
+        "after": null,
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_ecs_service.api",
+      "mode": "managed",
+      "type": "aws_ecs_service",
+      "name": "api",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"cluster": "prod", "desired_count": 12, "name": "api"},
+        "after": {"cluster": "prod", "desired_count": 4, "name": "api"},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "module.compute.aws_launch_template.workers",
+      "module_address": "module.compute",
+      "mode": "managed",
+      "type": "aws_launch_template",
+      "name": "workers",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"image_id": "ami-111", "instance_type": "m6i.large"},
+        "after": {"image_id": "ami-111", "instance_type": "m7i.2xlarge"},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[0]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[1]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[2]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[3]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[4]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[5]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[6]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[7]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[8]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[9]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[10]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[11]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[12]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[13]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[14]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[15]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[16]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[17]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[18]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[19]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[20]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[21]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[22]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[23]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[24]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[25]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[26]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[27]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[28]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[29]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_instance.noise[30]",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "noise",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"instance_type": "t3.micro", "tags": {"Env": "dev"}, "tags_all": {"Env": "dev"}},
+        "after": {"instance_type": "t3.micro", "tags": {"Env": "staging"}, "tags_all": {"Env": "staging"}},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[0]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-0", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[1]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-1", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[2]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-2", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[3]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-3", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[4]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-4", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[5]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-5", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[6]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-6", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[7]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-7", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[8]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-8", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "aws_s3_bucket.new[9]",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "new",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-new-9", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}

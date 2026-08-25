@@ -1,0 +1,21 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.app",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "app",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {"username": "admin", "password": "hunter2", "port": 5432},
+        "after": {"username": "admin", "password": "correct-horse-battery-staple", "port": 5433},
+        "after_unknown": {},
+        "before_sensitive": {"password": true},
+        "after_sensitive": {"password": true}
+      }
+    }
+  ]
+}

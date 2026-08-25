@@ -1,0 +1,21 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_s3_bucket.reports",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "reports",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {"bucket": "acme-reports", "force_destroy": false},
+        "after_unknown": {"id": true, "arn": true},
+        "before_sensitive": false,
+        "after_sensitive": false
+      }
+    }
+  ]
+}

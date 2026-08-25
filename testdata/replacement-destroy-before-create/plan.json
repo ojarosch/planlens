@@ -1,0 +1,22 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.13.0",
+  "resource_changes": [
+    {
+      "address": "aws_db_instance.production",
+      "mode": "managed",
+      "type": "aws_db_instance",
+      "name": "production",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {"engine": "postgres", "engine_version": "14.11", "instance_class": "db.t3.medium", "name": "prod"},
+        "after": {"engine": "postgres", "engine_version": "16.3", "instance_class": "db.t3.medium", "name": "prod"},
+        "after_unknown": {},
+        "before_sensitive": false,
+        "after_sensitive": false,
+        "replace_paths": [["engine_version"]]
+      }
+    }
+  ]
+}
