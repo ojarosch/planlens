@@ -239,7 +239,7 @@ Renders headings per category, inline code diffs, and collapses low-signal chang
 
 ```json
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "summary": { "resources_affected": 1, "replace": 1, "categories": { "replacement": 1 } },
   "findings": [
     {

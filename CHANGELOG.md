@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-08-25
+
+### Changed
+
+- Synced CI/release workflows with tfdoctor (actions v7, Trivy security scan,
+  renovate).
+- Homebrew cask now strips the macOS quarantine flag on install and the README
+  documents the manual `xattr` workaround for downloaded binaries.
+- Unified `--version` output across the tool family (`planlens 0.2.1`).
+
+
 ## [0.2.0] - 2026-08-25
 
 ### Changed

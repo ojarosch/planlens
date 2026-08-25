@@ -17,7 +17,7 @@ import (
 
 // Version is the planlens release version. It is overridden at build time
 // via -ldflags "-X planlens/internal/cli.Version={{.Version}}".
-var Version = "0.2.0"
+var Version = "0.2.1"
 
 // Exit codes.
 const (
