@@ -71,7 +71,7 @@ func ParseBytes(data []byte) (*Plan, error) {
 		OutputChanges:    make(map[string]OutputChange, len(raw.OutputChanges)),
 	}
 	for name, oc := range raw.OutputChanges {
-		p.OutputChanges[name] = OutputChange{Actions: oc.Actions}
+		p.OutputChanges[name] = OutputChange(oc)
 	}
 	for _, rc := range raw.ResourceChanges {
 		p.ResourceChanges = append(p.ResourceChanges, ResourceChange{

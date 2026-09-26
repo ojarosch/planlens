@@ -80,14 +80,15 @@ func JSON(w io.Writer, findings []analysis.Finding, fullSummary analysis.Summary
 			Title:         f.Title,
 			Description:   f.Description,
 		}
-		if f.ID == "change.resource-replacement" {
+		switch f.ID {
+		case "change.resource-replacement":
 			jf.Action = "replace"
 			jf.ReplacementOrder = f.ReplacementOrder
-		} else if f.ID == "change.resource-destroy" {
+		case "change.resource-destroy":
 			jf.Action = "delete"
-		} else if f.ID == "change.create" {
+		case "change.create":
 			jf.Action = "create"
-		} else {
+		default:
 			jf.Action = "update"
 		}
 		if len(f.Changes) > 0 {

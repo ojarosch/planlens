@@ -160,8 +160,6 @@ func TestReplacementShowsCausesFromReplacePaths(t *testing.T) {
 	}
 }
 
-func fmtValue(v any) string { return fmt.Sprint(v) }
-
 // TestSummaryDoesNotDoubleCountReplacements keeps the summary honest.
 func TestSummaryDoesNotDoubleCountReplacements(t *testing.T) {
 	_, summary := load(t, "replacement-destroy-before-create")

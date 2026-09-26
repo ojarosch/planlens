@@ -75,18 +75,18 @@ func Run(args []string, stdout, stderr io.Writer) int {
 	fs := flag.NewFlagSet("planlens", flag.ContinueOnError)
 	fs.SetOutput(stderr)
 	fs.Usage = func() {
-		fmt.Fprintln(stderr, "PLANLENS — a reviewer-oriented semantic diff for Terraform and OpenTofu plans")
-		fmt.Fprintln(stderr)
-		fmt.Fprintln(stderr, "Usage:")
-		fmt.Fprintln(stderr, "  planlens [flags] [plan.json]     (reads from stdin when no file is given)")
-		fmt.Fprintln(stderr)
-		fmt.Fprintln(stderr, "Flags:")
+		_, _ = fmt.Fprintln(stderr, "PLANLENS — a reviewer-oriented semantic diff for Terraform and OpenTofu plans")
+		_, _ = fmt.Fprintln(stderr)
+		_, _ = fmt.Fprintln(stderr, "Usage:")
+		_, _ = fmt.Fprintln(stderr, "  planlens [flags] [plan.json]     (reads from stdin when no file is given)")
+		_, _ = fmt.Fprintln(stderr)
+		_, _ = fmt.Fprintln(stderr, "Flags:")
 		fs.PrintDefaults()
-		fmt.Fprintln(stderr)
-		fmt.Fprintln(stderr, "Examples:")
-		fmt.Fprintln(stderr, "  tofu show -json tfplan | planlens")
-		fmt.Fprintln(stderr, "  planlens --fail-on replacement tfplan.json")
-		fmt.Fprintln(stderr, "  planlens --group-by module --format markdown tfplan.json")
+		_, _ = fmt.Fprintln(stderr)
+		_, _ = fmt.Fprintln(stderr, "Examples:")
+		_, _ = fmt.Fprintln(stderr, "  tofu show -json tfplan | planlens")
+		_, _ = fmt.Fprintln(stderr, "  planlens --fail-on replacement tfplan.json")
+		_, _ = fmt.Fprintln(stderr, "  planlens --group-by module --format markdown tfplan.json")
 	}
 	fs.StringVar(&cfg.format, "format", "text", "output format: text, json, or markdown")
 	fs.StringVar(&categories, "category", "", "comma-separated filter: only show these change categories")
@@ -100,22 +100,22 @@ func Run(args []string, stdout, stderr io.Writer) int {
 		return ExitError
 	}
 	if fs.NArg() > 1 {
-		fmt.Fprintln(stderr, "error: at most one positional plan file argument is allowed")
+		_, _ = fmt.Fprintln(stderr, "error: at most one positional plan file argument is allowed")
 		return ExitError
 	}
 	if cfg.version {
-		fmt.Fprintln(stdout, "planlens "+Version)
+		_, _ = fmt.Fprintln(stdout, "planlens "+Version)
 		return ExitOK
 	}
 	if cfg.format != "text" && cfg.format != "json" && cfg.format != "markdown" {
-		fmt.Fprintf(stderr, "error: invalid --format %q (want text, json, or markdown)\n", cfg.format)
+		_, _ = fmt.Fprintf(stderr, "error: invalid --format %q (want text, json, or markdown)\n", cfg.format)
 		return ExitError
 	}
 	cfg.failOn = make(map[string]bool, len(failOn))
 	for _, v := range failOn {
 		cat, ok := gateNames[strings.ToLower(v)]
 		if !ok {
-			fmt.Fprintf(stderr, "error: invalid --fail-on %q (want destroy or replacement)\n", v)
+			_, _ = fmt.Fprintf(stderr, "error: invalid --fail-on %q (want destroy or replacement)\n", v)
 			return ExitError
 		}
 		cfg.failOn[string(cat)] = true
@@ -125,7 +125,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 		for _, name := range strings.Split(categories, ",") {
 			cat, ok := categoryNames[strings.ToLower(strings.TrimSpace(name))]
 			if !ok {
-				fmt.Fprintf(stderr, "error: unknown category %q in --category\n", name)
+				_, _ = fmt.Fprintf(stderr, "error: unknown category %q in --category\n", name)
 				return ExitError
 			}
 			cfg.categories[cat] = true
@@ -134,7 +134,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 	switch cfg.groupBy {
 	case "", "none", "module", "type":
 	default:
-		fmt.Fprintf(stderr, "error: invalid --group-by %q (want module or type)\n", cfg.groupBy)
+		_, _ = fmt.Fprintf(stderr, "error: invalid --group-by %q (want module or type)\n", cfg.groupBy)
 		return ExitError
 	}
 	if cfg.groupBy == "none" {
@@ -143,7 +143,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 
 	p, err := readPlan(fs.Arg(0))
 	if err != nil {
-		fmt.Fprintf(stderr, "error: %v\n", err)
+		_, _ = fmt.Fprintf(stderr, "error: %v\n", err)
 		return ExitError
 	}
 
@@ -169,7 +169,7 @@ func Run(args []string, stdout, stderr io.Writer) int {
 		})
 	}
 	if errRender != nil {
-		fmt.Fprintf(stderr, "error rendering output: %v\n", errRender)
+		_, _ = fmt.Fprintf(stderr, "error rendering output: %v\n", errRender)
 		return ExitError
 	}
 
@@ -196,7 +196,7 @@ func readPlan(path string) (*plan.Plan, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 	return plan.Parse(f)
 }
 

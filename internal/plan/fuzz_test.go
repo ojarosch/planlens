@@ -18,7 +18,7 @@ func FuzzParseBytes(f *testing.F) {
 		}
 		for _, rc := range p.ResourceChanges {
 			Action(rc.Change.Actions) // must never panic
-			ProviderShortName(rc.ProviderName)
+			_ = ProviderShortName(rc.ProviderName)
 		}
 	})
 }

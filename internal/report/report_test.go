@@ -38,23 +38,6 @@ func sensitiveFixture(t *testing.T) ([]analysis.Finding, analysis.Summary) {
 	return analyzeForTest(p)
 }
 
-const secretsJSON = `{
-  "format_version": "1.2",
-  "resource_changes": [{
-    "address": "aws_instance.worker",
-    "type": "aws_instance",
-    "provider_name": "registry.terraform.io/hashicorp/aws",
-    "change": {
-      "actions": ["update"],
-      "before": {"ami": "ami-123"},
-      "after": {"ami": null},
-      "after_unknown": {"ami": true},
-      "before_sensitive": false,
-      "after_sensitive": false
-    }
-  }]
-}`
-
 func TestTextRedactsSensitiveValues(t *testing.T) {
 	findings, summary := sensitiveFixture(t)
 	var buf bytes.Buffer

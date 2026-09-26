@@ -22,11 +22,11 @@ var markdownHeaders = map[analysis.Category]string{
 // Markdown renders a pull-request-friendly report. Low-signal findings are
 // collapsed into a <details> block; pass Verbose to inline everything.
 func Markdown(w io.Writer, findings []analysis.Finding, summary analysis.Summary, terraformVersion, formatVersion string, opts TextOptions) error {
-	fmt.Fprintf(w, "## PlanLens\n\n")
+	_, _ = fmt.Fprintf(w, "## PlanLens\n\n")
 	if summary.ResourcesAffected > 0 {
-		fmt.Fprintf(w, "**%d resource%s affected**\n\n", summary.ResourcesAffected, plural(summary.ResourcesAffected))
+		_, _ = fmt.Fprintf(w, "**%d resource%s affected**\n\n", summary.ResourcesAffected, plural(summary.ResourcesAffected))
 	} else {
-		fmt.Fprintf(w, "No changes.\n")
+		_, _ = fmt.Fprintf(w, "No changes.\n")
 		return nil
 	}
 
@@ -40,7 +40,7 @@ func Markdown(w io.Writer, findings []analysis.Finding, summary analysis.Summary
 		}
 	}
 	if len(parts) > 0 {
-		fmt.Fprintf(w, "%s\n\n", strings.Join(parts, " · "))
+		_, _ = fmt.Fprintf(w, "%s\n\n", strings.Join(parts, " · "))
 	}
 
 	for _, cat := range highlightedCategories {
@@ -53,7 +53,7 @@ func Markdown(w io.Writer, findings []analysis.Finding, summary analysis.Summary
 		if len(section) == 0 {
 			continue
 		}
-		fmt.Fprintf(w, "### %s\n\n", markdownHeaders[cat])
+		_, _ = fmt.Fprintf(w, "### %s\n\n", markdownHeaders[cat])
 		for _, f := range section {
 			renderMarkdownFinding(w, f)
 		}
@@ -73,7 +73,7 @@ func Markdown(w io.Writer, findings []analysis.Finding, summary analysis.Summary
 	collapsed := len(meta) + len(computed) + len(creates)
 
 	if collapsed > 0 {
-		fmt.Fprintf(w, "<details>\n<summary>%d low-signal change%s</summary>\n\n", collapsed, plural(collapsed))
+		_, _ = fmt.Fprintf(w, "<details>\n<summary>%d low-signal change%s</summary>\n\n", collapsed, plural(collapsed))
 		for _, g := range []struct {
 			items []analysis.Finding
 			label string
@@ -82,46 +82,46 @@ func Markdown(w io.Writer, findings []analysis.Finding, summary analysis.Summary
 				if opts.Verbose {
 					renderMarkdownFinding(w, f)
 				} else {
-					fmt.Fprintf(w, "- `%s` (%s)\n", f.Address, g.label)
+					_, _ = fmt.Fprintf(w, "- `%s` (%s)\n", f.Address, g.label)
 				}
 			}
 		}
-		fmt.Fprintf(w, "\n</details>\n\n")
+		_, _ = fmt.Fprintf(w, "\n</details>\n\n")
 	}
 
 	return nil
 }
 
 func renderMarkdownFinding(w io.Writer, f analysis.Finding) {
-	fmt.Fprintf(w, "- `%s`\n", f.Address)
+	_, _ = fmt.Fprintf(w, "- `%s`\n", f.Address)
 	if f.ReplacementOrder != "" {
-		fmt.Fprintf(w, "  - replacement required (%s)\n", strings.ReplaceAll(f.ReplacementOrder, "-", " → "))
+		_, _ = fmt.Fprintf(w, "  - replacement required (%s)\n", strings.ReplaceAll(f.ReplacementOrder, "-", " → "))
 	} else if f.Description != "" {
 		for _, line := range strings.Split(f.Description, "\n") {
-			fmt.Fprintf(w, "  - %s\n", line)
+			_, _ = fmt.Fprintf(w, "  - %s\n", line)
 		}
 	}
 	shown := f.Changes
 	for i, ch := range shown {
 		if i == maxChangesShown {
-			fmt.Fprintf(w, "  - … %d more attribute changes\n", len(f.Changes)-i)
+			_, _ = fmt.Fprintf(w, "  - … %d more attribute changes\n", len(f.Changes)-i)
 			break
 		}
 		before, after := displayValues(ch)
 		if after == "" {
-			fmt.Fprintf(w, "  - `%s`: %s\n", ch.Path, before)
+			_, _ = fmt.Fprintf(w, "  - `%s`: %s\n", ch.Path, before)
 			continue
 		}
 		if added, removed, ok := diff.SetDiff(ch); ok && (len(added) > 0 || len(removed) > 0) {
-			fmt.Fprintf(w, "  - `%s`:\n", ch.Path)
+			_, _ = fmt.Fprintf(w, "  - `%s`:\n", ch.Path)
 			for _, v := range added {
-				fmt.Fprintf(w, "    - `+ %s`\n", v)
+				_, _ = fmt.Fprintf(w, "    - `+ %s`\n", v)
 			}
 			for _, v := range removed {
-				fmt.Fprintf(w, "    - `- %s`\n", v)
+				_, _ = fmt.Fprintf(w, "    - `- %s`\n", v)
 			}
 			continue
 		}
-		fmt.Fprintf(w, "  - `%s`: `%s` → `%s`\n", ch.Path, before, after)
+		_, _ = fmt.Fprintf(w, "  - `%s`: `%s` → `%s`\n", ch.Path, before, after)
 	}
 }

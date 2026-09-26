@@ -74,13 +74,13 @@ const maxChangesShown = 8
 func Text(w io.Writer, findings []analysis.Finding, summary analysis.Summary, terraformVersion, formatVersion string, opts TextOptions) error {
 	c := color{enabled: opts.Color}
 
-	fmt.Fprintln(w, c.bold("PLANLENS"))
+	_, _ = fmt.Fprintln(w, c.bold("PLANLENS"))
 	if terraformVersion != "" || formatVersion != "" {
-		fmt.Fprintf(w, "%s\n", c.dim(fmt.Sprintf("terraform %s · format %s", terraformVersion, formatVersion)))
+		_, _ = fmt.Fprintf(w, "%s\n", c.dim(fmt.Sprintf("terraform %s · format %s", terraformVersion, formatVersion)))
 	}
-	fmt.Fprintln(w)
-	fmt.Fprintln(w, c.bold("Plan"))
-	fmt.Fprintf(w, "%d resource%s affected\n", summary.ResourcesAffected, plural(summary.ResourcesAffected))
+	_, _ = fmt.Fprintln(w)
+	_, _ = fmt.Fprintln(w, c.bold("Plan"))
+	_, _ = fmt.Fprintf(w, "%d resource%s affected\n", summary.ResourcesAffected, plural(summary.ResourcesAffected))
 	parts := []string{}
 	for _, k := range []struct {
 		n int
@@ -93,8 +93,8 @@ func Text(w io.Writer, findings []analysis.Finding, summary analysis.Summary, te
 	if len(parts) == 0 {
 		parts = append(parts, "no changes")
 	}
-	fmt.Fprintln(w, strings.Join(parts, " · "))
-	fmt.Fprintln(w)
+	_, _ = fmt.Fprintln(w, strings.Join(parts, " · "))
+	_, _ = fmt.Fprintln(w)
 
 	highlighted, collapsed := 0, 0
 	for _, cat := range highlightedCategories {
@@ -108,9 +108,9 @@ func Text(w io.Writer, findings []analysis.Finding, summary analysis.Summary, te
 			continue
 		}
 		highlighted += len(section)
-		fmt.Fprintln(w, c.bold(categoryHeaders[cat]))
+		_, _ = fmt.Fprintln(w, c.bold(categoryHeaders[cat]))
 		renderGrouped(w, section, opts)
-		fmt.Fprintln(w)
+		_, _ = fmt.Fprintln(w)
 	}
 
 	// LOW-SIGNAL: collapsed noise reduction summary.
@@ -128,18 +128,18 @@ func Text(w io.Writer, findings []analysis.Finding, summary analysis.Summary, te
 	collapsed = len(meta) + len(computed) + len(creates)
 
 	if collapsed > 0 {
-		fmt.Fprintln(w, c.bold("LOW-SIGNAL"))
-		fmt.Fprintln(w, c.dim(fmt.Sprintf("%d change%s collapsed:", collapsed, plural(collapsed))))
+		_, _ = fmt.Fprintln(w, c.bold("LOW-SIGNAL"))
+		_, _ = fmt.Fprintln(w, c.dim(fmt.Sprintf("%d change%s collapsed:", collapsed, plural(collapsed))))
 		for _, g := range []struct {
 			items []analysis.Finding
 			label string
 		}{{meta, "metadata-only"}, {computed, "computed/unknown-only"}, {creates, "straightforward creates"}} {
 			if len(g.items) > 0 {
-				fmt.Fprintf(w, "  %d %s\n", len(g.items), g.label)
+				_, _ = fmt.Fprintf(w, "  %d %s\n", len(g.items), g.label)
 			}
 		}
 		if !opts.Verbose {
-			fmt.Fprintln(w, "Use --verbose to display them.")
+			_, _ = fmt.Fprintln(w, "Use --verbose to display them.")
 		} else {
 			for _, g := range creates {
 				renderFinding(w, g)
@@ -151,19 +151,19 @@ func Text(w io.Writer, findings []analysis.Finding, summary analysis.Summary, te
 				renderFinding(w, f)
 			}
 		}
-		fmt.Fprintln(w)
+		_, _ = fmt.Fprintln(w)
 	}
 
 	if highlighted+collapsed == 0 && summary.ResourcesAffected == 0 {
-		fmt.Fprintln(w, "No changes.")
+		_, _ = fmt.Fprintln(w, "No changes.")
 		return nil
 	}
 
-	fmt.Fprintln(w, strings.Repeat("─", 30))
+	_, _ = fmt.Fprintln(w, strings.Repeat("─", 30))
 	if opts.Verbose || collapsed == 0 {
-		fmt.Fprintf(w, "%d change%s shown\n", highlighted+collapsed, plural(highlighted+collapsed))
+		_, _ = fmt.Fprintf(w, "%d change%s shown\n", highlighted+collapsed, plural(highlighted+collapsed))
 	} else {
-		fmt.Fprintf(w, "%d highlighted · %d collapsed\n", highlighted, collapsed)
+		_, _ = fmt.Fprintf(w, "%d highlighted · %d collapsed\n", highlighted, collapsed)
 	}
 	return nil
 }
@@ -188,7 +188,7 @@ func renderGrouped(w io.Writer, findings []analysis.Finding, opts TextOptions) {
 	for _, f := range findings {
 		key := keyOf(f)
 		if key != lastKey {
-			fmt.Fprintln(w, key)
+			_, _ = fmt.Fprintln(w, key)
 			lastKey = key
 		}
 		renderFinding(w, f, "  ")
@@ -201,38 +201,38 @@ func renderFinding(w io.Writer, f analysis.Finding, pads ...string) {
 	if len(pads) > 0 {
 		pad = pads[0]
 	}
-	fmt.Fprintln(w, pad+f.Address)
+	_, _ = fmt.Fprintln(w, pad+f.Address)
 	if f.Description != "" {
-		fmt.Fprintln(w, indentLines(f.Description, pad+"  "))
+		_, _ = fmt.Fprintln(w, indentLines(f.Description, pad+"  "))
 	}
 	shown := f.Changes
 	for i, ch := range shown {
 		if i == maxChangesShown {
-			fmt.Fprintf(w, "%s  … %d more attribute changes\n", pad, len(f.Changes)-i)
+			_, _ = fmt.Fprintf(w, "%s  … %d more attribute changes\n", pad, len(f.Changes)-i)
 			break
 		}
 		renderChange(w, ch, pad+"  ")
 	}
-	fmt.Fprintln(w)
+	_, _ = fmt.Fprintln(w)
 }
 
 func renderChange(w io.Writer, ch diff.AttributeChange, pad string) {
 	before, after := displayValues(ch)
 	if after == "" {
-		fmt.Fprintf(w, "%s%s:\n%s  %s\n", pad, ch.Path, pad, before)
+		_, _ = fmt.Fprintf(w, "%s%s:\n%s  %s\n", pad, ch.Path, pad, before)
 		return
 	}
 	if added, removed, ok := diff.SetDiff(ch); ok && (len(added) > 0 || len(removed) > 0) {
-		fmt.Fprintf(w, "%s%s:\n", pad, ch.Path)
+		_, _ = fmt.Fprintf(w, "%s%s:\n", pad, ch.Path)
 		for _, v := range added {
-			fmt.Fprintf(w, "%s  + %s\n", pad, v)
+			_, _ = fmt.Fprintf(w, "%s  + %s\n", pad, v)
 		}
 		for _, v := range removed {
-			fmt.Fprintf(w, "%s  - %s\n", pad, v)
+			_, _ = fmt.Fprintf(w, "%s  - %s\n", pad, v)
 		}
 		return
 	}
-	fmt.Fprintf(w, "%s%s:\n%s  %s → %s\n", pad, ch.Path, pad, before, after)
+	_, _ = fmt.Fprintf(w, "%s%s:\n%s  %s → %s\n", pad, ch.Path, pad, before, after)
 }
 
 func plural(n int) string {
