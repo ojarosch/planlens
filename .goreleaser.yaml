@@ -33,32 +33,20 @@ archives:
 checksum:
   name_template: checksums.txt
 
-homebrew_casks:
+brews:
   - name: planlens
     repository:
       owner: ojarosch
       name: homebrew-tap
-      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
-    commit_author:
-      name: goreleaserbot
-      email: bot@goreleaser.com
-    commit_msg_template: "Brew cask update for {{ .ProjectName }} version {{ .Tag }}"
-    directory: Casks
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
     homepage: "https://github.com/ojarosch/planlens"
     description: "Reviewer-oriented semantic diff for Terraform/OpenTofu plans"
     license: "Apache-2.0"
-    binaries:
-      - planlens
-    url:
-      verified: "github.com/ojarosch/planlens"
-    hooks:
-      post:
-        # Binary is not signed/notarized; strip quarantine so Gatekeeper
-        # doesn't kill it on first run.
-        install: |
-          if OS.mac?
-            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/planlens"]
-          end
+    install: |
+      bin.install "planlens"
+    test: |
+      system "#{bin}/planlens", "--version"
 
 snapshot:
   version_template: "{{ incpatch .Version }}-next"
